@@ -1,0 +1,25 @@
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: {{ public_ip }}
+  bindPort: 6443
+---
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: {{ kubernetes_version }}
+apiServer:
+  certSANs:
+    - {{ load_balancer_dns }}
+  extraArgs:
+    feature-gates: TTLAfterFinished=true
+    oidc-issuer-url: https://gitlab.com
+    # Credentials of Dev Kubernetes gitlab application
+    oidc-client-id: {{ oidc_client_id }}
+    # Gitlab public CA certificate
+    oidc-ca-file: /etc/ssl/certs/gitlab-ca.pem
+    oidc-username-claim: email
+    oidc-groups-claim: groups
+controlPlaneEndpoint: {{ load_balancer_dns }}:{{ load_balancer_port }}
+networking:
+  podSubnet: 10.244.0.0/16
+clusterName: {{ cluster_name }}

@@ -1,0 +1,34 @@
+- hosts: kube-master,kube-worker
+  tasks:
+    - name: Collect service state
+      wait_for:
+        host: localhost
+        port: 10250
+        timeout: 1
+      register: services_state
+      ignore_errors: True
+    - name: Cleanup kubeadm + flannel
+      block:
+      - name: kubeadm reset
+        command: kubeadm reset --force
+      - name: Stop services
+        service:
+          name: "{{ item }}"
+          state: stopped
+        with_items: ['kubelet', 'docker']
+      - name: Remove directories
+        file:
+          state: absent
+          path: "{{ item }}/"
+        with_items: ['/var/lib/cni/', '/var/lib/kubelet/', '/etc/cni/']
+      - name: Down network interfaces
+        command: "ifconfig {{ item }} down"
+        with_items: ['cni0', 'flannel.1', 'docker0']
+      - name: Delete interface links
+        command: "ip link delete {{ item }}"
+        with_items: ['cni0', 'flannel.1']
+      - name: Start docker
+        service:
+          name: docker
+          state: started
+      when: not services_state.failed
