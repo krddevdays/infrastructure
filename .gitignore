@@ -1,0 +1,7 @@
+.envrc
+id_rsa
+ansible/pki
+ansible/inventory
+*.retry
+.terraform
+terraform.plan
