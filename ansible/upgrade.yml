@@ -1,0 +1,43 @@
+- hosts: kube-master[0]
+  vars:
+    cluster_name: krddevdays.ru
+    kubernetes_version: v1.13.4
+    load_balancer_dns: k.krddevdays.ru
+    load_balancer_port: 6443
+    oidc_client_id: 11621f1687ac736e850abc78f31267da276afa812dd827d1ec45f680e0238b55
+    public_ip: "{{ ansible_host }}"
+  tasks:
+    - name: Collect service state
+      wait_for:
+        host: localhost
+        port: 10250
+        timeout: 1
+      register: services_state
+      ignore_errors: True
+    - name: Node needs upgrade
+      block:
+        - name: Copy kubeadm config
+          template:
+            src: ./templates/kubeadm-config.yml.j2
+            dest: /root/kubeadm-config.yaml
+            mode: 0600
+        - name: Start kubeadm upgrade
+          command: kubeadm upgrade apply {{ kubernetes_version }} --config /root/kubeadm-config.yaml -y
+      when: not services_state.failed
+
+- hosts: kube-master[1:]
+  vars:
+    kubernetes_version: v1.13.4
+  tasks:
+    - name: Collect service state
+      wait_for:
+        host: localhost
+        port: 10250
+        timeout: 1
+      register: services_state
+      ignore_errors: True
+    - name: Node needs upgrade
+      block:
+        - name: Start kubeadm upgrade
+          command: kubeadm upgrade apply {{ kubernetes_version }} -y
+      when: not services_state.failed

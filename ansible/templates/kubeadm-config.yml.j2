@@ -1,0 +1,12 @@
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: {{ kubernetes_version }}
+apiServer:
+  certSANs:
+    - {{ load_balancer_dns }}
+  extraArgs:
+    feature-gates: TTLAfterFinished=true
+controlPlaneEndpoint: {{ load_balancer_dns }}:{{ load_balancer_port }}
+networking:
+  podSubnet: 10.244.0.0/16
+clusterName: {{ cluster_name }}
