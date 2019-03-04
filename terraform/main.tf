@@ -42,5 +42,11 @@ resource "yandex_compute_instance" "masters" {
     ssh-keys = "ubuntu:${file("./../keys/id_rsa.pub")}"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "sudo hostnamectl set-hostname master-${count.index}",
+    ]
+  }
+
   count = "${var.master_count}"
 }
