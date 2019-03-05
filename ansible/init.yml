@@ -22,9 +22,8 @@
 
 - hosts: kube-master[0]
   vars:
-    cluster_name: krddevdays.ru
+    cluster_name: krddevdays
     kubernetes_version: v1.13.4
-    load_balancer_dns: k.krddevdays.ru
     load_balancer_port: 6443
     public_ip: "{{ ansible_host }}"
   tasks:
@@ -91,7 +90,7 @@
           state: directory
           mode: 0600
       - name: Copy keys and certs
-        copy:      
+        copy:
           src: ./pki/{{ item }}
           dest: /etc/kubernetes/pki/{{ item }}
           mode: 0600

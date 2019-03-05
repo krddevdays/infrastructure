@@ -1,3 +1,5 @@
+provider "dnsimple" {}
+
 provider "yandex" {}
 
 # TODO: implement yc backend https://github.com/hashicorp/terraform/tree/master/backend/remote-state

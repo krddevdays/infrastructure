@@ -12,7 +12,10 @@ data "template_file" "hosts_ini" {
   vars {
     # TODO: error here will be fixed in 0.12.0 https://github.com/hashicorp/terraform/issues/18160
     # For now comment-uncomment on size change. Sry
+    # master_inventories = ""
     master_inventories = "${join("\n", null_resource.master_inventory.*.triggers.ansible_host)}"
+
+    load_balancer_dns = "${dnsimple_record.apiserver.hostname}"
   }
 
   depends_on = ["null_resource.master_inventory"]

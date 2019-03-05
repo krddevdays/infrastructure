@@ -7,3 +7,5 @@ variable "master_count" {
   description = "Number of master instances"
   default     = 1
 }
+
+variable "domain" {}

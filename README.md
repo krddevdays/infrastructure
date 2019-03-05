@@ -25,6 +25,9 @@ No variables - no success.
 `YC_KEY_ID` - service account key ID.
 `YC_KEY_SECRET` - service account key secret.
 `YC_BUCKET` - bucket name for backend.
+`DNSIMPLE_TOKEN` - DNSimple token.
+`DNSIMPLE_ACCOUNT` - DNSimple account id.
+`TF_VAR_domain` - domain name on DNSimple.
 
 ## Errata
 
