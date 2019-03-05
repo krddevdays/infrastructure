@@ -46,8 +46,11 @@ resource "yandex_compute_instance" "masters" {
     type = "ssh"
     user = "ubuntu"
 
-    # TODO: woof woof
+    # TODO: woof woof. Insecure due to self-signed apiserver certificate
     insecure = true
+
+    private_key = "${file("./../keys/id_rsa")}"
+    agent       = false
   }
 
   provisioner "remote-exec" {
