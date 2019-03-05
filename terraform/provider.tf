@@ -4,7 +4,6 @@ provider "yandex" {}
 terraform {
   backend "s3" {
     endpoint = "storage.yandexcloud.net"
-    bucket   = "krddevdaystest"
     key      = "state/production"
     region   = "us-east-1"
 

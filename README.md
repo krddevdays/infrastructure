@@ -14,7 +14,7 @@ ansible-playbook init.yml
 
 After completion, cluster admin config can be found in `ansible/pki/admin.conf`
 
-## Required environment varialbes
+## Required environment variables
 
 No variables - no success.
 
@@ -23,7 +23,8 @@ No variables - no success.
 `YC_FOLDER_ID` - YC project folder identifier.
 `YC_ZONE` - default YC AZ.
 `YC_KEY_ID` - service account key ID.
-`YC_KEY_SECRET`  - service account key secret.
+`YC_KEY_SECRET` - service account key secret.
+`YC_BUCKET` - bucket name for backend.
 
 ## Errata
 
