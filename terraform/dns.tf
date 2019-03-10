@@ -5,7 +5,7 @@ resource "dnsimple_record" "apiserver" {
   type   = "A"
   ttl    = 3600
 
-  count = "${length(yandex_compute_instance.masters.*.network_interface)}"
+  count = "${var.master_count}"
 }
 
 resource "dnsimple_record" "frontend" {
@@ -15,5 +15,5 @@ resource "dnsimple_record" "frontend" {
   type   = "A"
   ttl    = 3600
 
-  count = "${length(yandex_compute_instance.masters.*.network_interface)}"
+  count = "${var.master_count}"
 }
