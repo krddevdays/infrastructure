@@ -1,0 +1,51 @@
+# Nginx ingress
+nginx-ingress:
+  enabled: true
+  controller:
+    headers:
+      x-forwarded-proto: https
+    kind: DaemonSet
+    service:
+      type: ClusterIP
+    daemonset:
+      useHostPort: true
+    nodeSelector: {}
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+    metrics:
+      enabled: true
+      service:
+        annotations:
+          prometheus.io/scrape: true
+          prometheus.io/port: 10254
+  service:
+    type: ClusterIP
+  revisionHistoryLimit: 2
+  defaultBackend:
+    nodeSelector: {}
+    resources:
+      limits:
+        cpu: 20m
+        memory: 30Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+# Cert manager for certificates in shim mode
+cert-manager:
+  createCustomResource: false
+  enabled: true
+  ingressShim:
+    defaultIssuerName: letsencrypt-prod
+    defaultIssuerKind: ClusterIssuer
+    defaultACMEChallengeType: http01
+  rbac:
+    create: true
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  nodeSelector: {}
