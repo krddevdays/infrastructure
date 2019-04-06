@@ -1,0 +1,9 @@
+terraform/id_rsa.pem
+terraform/id_rsa.pub
+terraform/dhparams.pem
+terraform/site-config
+.terraform
+terraform.*
+terraform.plan
+.idea
+.DS_Store
