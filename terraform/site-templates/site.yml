@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config:
+  nginx_config_2:
     file: ./conf/site.conf
   dhparams:
     file: ./dhparams.pem
@@ -37,7 +37,7 @@ services:
       - LE_EMAIL=${email}
       - LE_FQDN=${frontend_domain},${backend_domain}
     configs:
-      - source: nginx_config
+      - source: nginx_config_2
         target: /etc/nginx/service.conf
       - source: dhparams
         target: /etc/nginx/ssl/dhparams.pem
