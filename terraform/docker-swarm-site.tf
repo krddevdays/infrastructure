@@ -42,6 +42,9 @@ resource "template_dir" "docker_swarm_site" {
         db_port = "${var.db_port}"
 
         email = "${var.certbot_email}"
+
+        qtickets_endpoint = "${var.qtickets_endpoint}"
+        qtickets_token = "${var.qtickets_token}"
     }
 }
 
@@ -65,6 +68,9 @@ resource "null_resource" "docker_stack_site" {
         db_port = "${var.db_port}"
 
         email = "${var.certbot_email}"
+
+        qtickets_endpoint = "${var.qtickets_endpoint}"
+        qtickets_token = "${var.qtickets_token}"
     }
 
     connection {

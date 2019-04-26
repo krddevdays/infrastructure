@@ -57,3 +57,11 @@ variable "db_host" {
 variable "db_port" {
   type = "string"
 }
+
+variable "qtickets_endpoint" {
+    type = "string"
+}
+
+variable "qtickets_token" {
+    type = "string"
+}

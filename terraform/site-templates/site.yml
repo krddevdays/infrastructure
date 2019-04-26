@@ -26,6 +26,8 @@ services:
       - DB_HOST=${db_host}
       - DB_PORT=${db_port}
       - ALLOWED_HOSTS=${backend_domain}
+      - QTICKETS_ENDPOINT=${qtickets_endpoint}
+      - QTICKETS_TOKEN=${qtickets_token}
     networks:
       - net
 
