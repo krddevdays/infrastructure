@@ -13,6 +13,8 @@ networks:
 services:
   frontend:
     image: ${frontend_image_name}:${frontend_image_version}
+    environment:
+      - BACKEND_DOMAIN=${backend_domain}
     networks:
       - net
 
