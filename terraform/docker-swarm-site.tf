@@ -48,29 +48,15 @@ resource "template_dir" "docker_swarm_site" {
     }
 }
 
+data "archive_file" "docker_swarm_site_config" {
+    type        = "zip"
+    source_dir = "${template_dir.docker_swarm_site.destination_dir}"
+    output_path = "site-config.zip"
+}
+
 resource "null_resource" "docker_stack_site" {
     triggers {
-        frontend_image_name = "${var.frontend_image_name}"
-        frontend_image_version = "${var.frontend_image_version}"
-        frontend_domain = "${dnsimple_record.frontend.hostname}"
-
-        backend_image_name = "${var.backend_image_name}"
-        backend_image_version = "${var.backend_image_version}"
-        backend_domain = "${dnsimple_record.backend.hostname}"
-
-        backend_secret_key = "${var.backend_secret_key}"
-
-        backend_db_name = "${var.backend_db_name}"
-        backend_db_user = "${var.backend_db_user}"
-        backend_db_password = "${var.backend_db_password}"
-
-        db_host = "${var.db_host}"
-        db_port = "${var.db_port}"
-
-        email = "${var.certbot_email}"
-
-        qtickets_endpoint = "${var.qtickets_endpoint}"
-        qtickets_token = "${var.qtickets_token}"
+        hash = "${data.archive_file.docker_swarm_site_config.output_sha}"
     }
 
     connection {
