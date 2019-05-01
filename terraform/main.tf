@@ -25,7 +25,7 @@ resource "yandex_compute_instance" "docker_swarm" {
     initialize_params = {
       image_id    = "${data.yandex_compute_image.ubuntu_1804_lts.id}"
       name        = "docker-swarm-manager"
-      size        = 10
+      size        = 100
     }
   }
 
