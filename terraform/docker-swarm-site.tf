@@ -70,6 +70,12 @@ resource "null_resource" "docker_stack_site" {
         agent = false
     }
 
+    provisioner "remote-exec" {
+        inline = [
+            "sudo docker image prune -f"
+        ]
+    }
+
     provisioner "file" {
         source = "${template_dir.docker_swarm_site.destination_dir}"
         destination = "/home/ubuntu"
