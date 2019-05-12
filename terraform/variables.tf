@@ -65,3 +65,7 @@ variable "qtickets_endpoint" {
 variable "qtickets_token" {
     type = "string"
 }
+
+variable "backend_sentry_dsn" {
+    type = "string"
+}

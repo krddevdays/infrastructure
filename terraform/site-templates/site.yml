@@ -32,6 +32,7 @@ services:
       - ALLOWED_HOSTS=${backend_domain}
       - QTICKETS_ENDPOINT=${qtickets_endpoint}
       - QTICKETS_TOKEN=${qtickets_token}
+      - SENTRY_DSN=${backend_sentry_dsn}
     networks:
       - net
 
