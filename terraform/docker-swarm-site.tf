@@ -39,6 +39,8 @@ resource "template_dir" "docker_swarm_site" {
         backend_db_password = "${var.backend_db_password}"
 
         backend_sentry_dsn = "${var.backend_sentry_dsn}"
+        frontend_sentry_dsn = "${var.frontend_sentry_dsn}"
+        frontend_sentry_token = "${var.frontend_sentry_token}"
 
         db_host = "${var.db_host}"
         db_port = "${var.db_port}"

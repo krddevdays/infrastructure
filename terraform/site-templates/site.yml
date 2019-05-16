@@ -16,6 +16,8 @@ services:
     environment:
       - BACKEND_DOMAIN=${backend_domain}
       - "BACKEND_PROTOCOL=https:"
+      - SENTRY_DSN=${frontend_sentry_dsn}
+      - SENTRY_TOKEN=${frontend_sentry_token}
     networks:
       - net
 
