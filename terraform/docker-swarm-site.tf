@@ -32,6 +32,8 @@ resource "template_dir" "docker_swarm_site" {
         backend_image_version = "${var.backend_image_version}"
         backend_domain = "${dnsimple_record.backend.hostname}"
 
+        backend_cors_list = "https://${dnsimple_record.frontend.hostname}"
+
         backend_secret_key = "${var.backend_secret_key}"
 
         backend_db_name = "${var.backend_db_name}"
