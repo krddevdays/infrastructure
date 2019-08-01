@@ -35,7 +35,7 @@ services:
       - QTICKETS_ENDPOINT=${qtickets_endpoint}
       - QTICKETS_TOKEN=${qtickets_token}
       - SENTRY_DSN=${backend_sentry_dsn}
-      - CORS_LIST=${backend_cors_list}
+      - CORS_LIST=${backend_cors_list},http://localhost:3000
     networks:
       - net
 
