@@ -6,6 +6,9 @@ configs:
   dhparams:
     file: ./dhparams.pem
 
+volumes:
+  ssl:
+
 networks:
   net:
     driver: overlay
@@ -51,6 +54,8 @@ services:
         target: /etc/nginx/service.conf
       - source: dhparams
         target: /etc/nginx/ssl/dhparams.pem
+    volumes:
+      - ssl:/etc/nginx/ssl
     ports:
       - 80:80
       - 443:443
