@@ -8,6 +8,7 @@ configs:
 
 volumes:
   ssl:
+  letsencrypt:
 
 networks:
   net:
@@ -56,6 +57,7 @@ services:
         target: /etc/nginx/ssl/dhparams.pem
     volumes:
       - ssl:/etc/nginx/ssl
+      - letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
       - 443:443
