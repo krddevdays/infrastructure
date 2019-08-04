@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config_9:
+  nginx_config_10:
     file: ./conf/site.conf
   dhparams:
     file: ./dhparams.pem
@@ -49,9 +49,9 @@ services:
       - TZ=Europe/Moscow
       - LETSENCRYPT=true
       - LE_EMAIL=${email}
-      - LE_FQDN=${frontend_domain},${backend_domain},krddevdays.ru
+      - LE_FQDN=krddevdays.ru
     configs:
-      - source: nginx_config_9
+      - source: nginx_config_10
         target: /etc/nginx/service.conf
       - source: dhparams
         target: /etc/nginx/ssl/dhparams.pem
