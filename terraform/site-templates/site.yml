@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config_6:
+  nginx_config_7:
     file: ./conf/site.conf
   dhparams:
     file: ./dhparams.pem
@@ -47,7 +47,7 @@ services:
       - LE_EMAIL=${email}
       - LE_FQDN=${frontend_domain},${backend_domain},krddevdays.ru
     configs:
-      - source: nginx_config_6
+      - source: nginx_config_7
         target: /etc/nginx/service.conf
       - source: dhparams
         target: /etc/nginx/ssl/dhparams.pem
