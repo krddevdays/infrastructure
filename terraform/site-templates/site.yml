@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config_4:
+  nginx_config_5:
     file: ./conf/site.conf
   dhparams:
     file: ./dhparams.pem
@@ -31,7 +31,7 @@ services:
       - DB_PASSWORD=${backend_db_password}
       - DB_HOST=${db_host}
       - DB_PORT=${db_port}
-      - ALLOWED_HOSTS=${backend_domain}
+      - ALLOWED_HOSTS=${backend_domain},${frontend_domain}
       - QTICKETS_ENDPOINT=${qtickets_endpoint}
       - QTICKETS_TOKEN=${qtickets_token}
       - SENTRY_DSN=${backend_sentry_dsn}
@@ -47,7 +47,7 @@ services:
       - LE_EMAIL=${email}
       - LE_FQDN=${frontend_domain},${backend_domain},krddevdays.ru
     configs:
-      - source: nginx_config_4
+      - source: nginx_config_5
         target: /etc/nginx/service.conf
       - source: dhparams
         target: /etc/nginx/ssl/dhparams.pem
