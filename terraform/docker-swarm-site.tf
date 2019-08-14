@@ -51,6 +51,7 @@ resource "template_dir" "docker_swarm_site" {
 
         qtickets_endpoint = "${var.qtickets_endpoint}"
         qtickets_token = "${var.qtickets_token}"
+        qtickets_secret = "${var.qtickets_secret}"
     }
 }
 

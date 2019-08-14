@@ -38,6 +38,7 @@ services:
       - ALLOWED_HOSTS=${backend_domain},${frontend_domain}
       - QTICKETS_ENDPOINT=${qtickets_endpoint}
       - QTICKETS_TOKEN=${qtickets_token}
+      - QTICKETS_SECRET=${qtickets_secret}
       - SENTRY_DSN=${backend_sentry_dsn}
       - CORS_LIST=${backend_cors_list},http://localhost:3000
     networks:
