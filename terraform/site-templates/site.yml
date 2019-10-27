@@ -3,11 +3,14 @@ version: '3.4'
 configs:
   nginx_config_13:
     file: ./conf/site.conf
-  dhparams:
+  dhparams_${dhparams_version}:
     file: ./dhparams.pem
+  krddev_crt_${krddev_crt_version}:
+    file: ./STAR_krd_dev.crt
+  krddev_key_${krddev_key_version}:
+    file: ./STAR_krd_dev.key
 
 volumes:
-  ssl:
   letsencrypt:
 
 networks:
@@ -54,10 +57,13 @@ services:
     configs:
       - source: nginx_config_13
         target: /etc/nginx/service.conf
-      - source: dhparams
+      - source: dhparams_${dhparams_version}
         target: /etc/nginx/ssl/dhparams.pem
+      - source: krddev_crt_${krddev_crt_version}
+        target: /etc/nginx/ssl/STAR_krd_dev.crt
+      - source: krddev_key_${krddev_key_version}
+        target: /etc/nginx/ssl/STAR_krd_dev.key
     volumes:
-      - ssl:/etc/nginx/ssl
       - letsencrypt:/etc/letsencrypt
     ports:
       - 80:80

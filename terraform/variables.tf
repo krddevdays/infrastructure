@@ -34,6 +34,26 @@ variable "dhparams" {
   type = "string"
 }
 
+variable "dhparams_version" {
+  type = "string"
+}
+
+variable "krddev_crt" {
+  type = "string"
+}
+
+variable "krddev_crt_version" {
+  type = "string"
+}
+
+variable "krddev_key" {
+  type = "string"
+}
+
+variable "krddev_key_version" {
+  type = "string"
+}
+
 variable "backend_secret_key" {
   type = "string"
 }

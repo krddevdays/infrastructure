@@ -52,6 +52,10 @@ resource "template_dir" "docker_swarm_site" {
         qtickets_endpoint = "${var.qtickets_endpoint}"
         qtickets_token = "${var.qtickets_token}"
         qtickets_secret = "${var.qtickets_secret}"
+
+        dhparams_version = "${var.dhparams_version}"
+        krddev_crt_version = "${var.krddev_crt_version}"
+        krddev_key_version = "${var.krddev_key_version}"
     }
 }
 
@@ -93,9 +97,21 @@ resource "null_resource" "docker_stack_site" {
         destination = "/home/ubuntu/${local.docker_swarm_site_config_dir}/dhparams.pem"
     }
 
+    provisioner "file" {
+        source = "${var.krddev_crt}"
+        destination = "/home/ubuntu/${local.docker_swarm_site_config_dir}/STAR_krd_dev.crt"
+    }
+
+    provisioner "file" {
+        source = "${var.krddev_key}"
+        destination = "/home/ubuntu/${local.docker_swarm_site_config_dir}/STAR_krd_dev.key"
+    }
+
     provisioner "remote-exec" {
         inline = [
             "chmod 600 /home/ubuntu/${local.docker_swarm_site_config_dir}/dhparams.pem",
+            "chmod 600 /home/ubuntu/${local.docker_swarm_site_config_dir}/STAR_krd_dev.crt",
+            "chmod 600 /home/ubuntu/${local.docker_swarm_site_config_dir}/STAR_krd_dev.key",
             "cd /home/ubuntu/${local.docker_swarm_site_config_dir}",
             "sudo docker stack deploy -c site.yml site"
         ]
