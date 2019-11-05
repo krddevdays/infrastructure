@@ -79,7 +79,7 @@ resource "template_dir" "docker_swarm_site" {
         imageboard_s3_storage_bucket_name = "${yandex_storage_bucket.imageboard.id}"
         imageboard_s3_region_name = "ru-central1"
         imageboard_s3_endpoint_url = "https://storage.yandexcloud.net"
-        imageboard_media_url = "https://storage.yandexcloud.net/${yandex_storage_bucket.imageboard.id}/"
+        imageboard_media_url = "https://storage.yandexcloud.net/${yandex_storage_bucket.imageboard.id}/upload/"
     }
 }
 
