@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config_14:
+  nginx_config_15:
     file: ./conf/site.conf
   dhparams_${dhparams_version}:
     file: ./dhparams.pem
@@ -75,7 +75,7 @@ services:
       - LE_EMAIL=${email}
       - LE_FQDN=krddevdays.ru
     configs:
-      - source: nginx_config_14
+      - source: nginx_config_15
         target: /etc/nginx/service.conf
       - source: dhparams_${dhparams_version}
         target: /etc/nginx/ssl/dhparams.pem
