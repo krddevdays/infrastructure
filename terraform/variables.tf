@@ -70,11 +70,11 @@ variable "backend_db_password" {
   type = "string"
 }
 
-variable "db_host" {
+variable "backend_db_host" {
   type = "string"
 }
 
-variable "db_port" {
+variable "backend_db_port" {
   type = "string"
 }
 
@@ -98,7 +98,38 @@ variable "frontend_sentry_dsn" {
     type = "string"
 }
 
-
 variable "frontend_sentry_token" {
+    type = "string"
+}
+
+variable "imageboard_image_name" {
+    type = "string"
+}
+
+variable "imageboard_image_version" {
+    type = "string"
+}
+
+variable "imageboard_secret_key" {
+    type = "string"
+}
+
+variable "imageboard_db_name" {
+    type = "string"
+}
+
+variable "imageboard_db_user" {
+    type = "string"
+}
+
+variable "imageboard_db_password" {
+    type = "string"
+}
+
+variable "imageboard_db_host" {
+    type = "string"
+}
+
+variable "imageboard_db_port" {
     type = "string"
 }

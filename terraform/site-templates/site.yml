@@ -1,7 +1,7 @@
 version: '3.4'
 
 configs:
-  nginx_config_13:
+  nginx_config_14:
     file: ./conf/site.conf
   dhparams_${dhparams_version}:
     file: ./dhparams.pem
@@ -36,14 +36,34 @@ services:
       - DB_NAME=${backend_db_name}
       - DB_USER=${backend_db_user}
       - DB_PASSWORD=${backend_db_password}
-      - DB_HOST=${db_host}
-      - DB_PORT=${db_port}
+      - DB_HOST=${backend_db_host}
+      - DB_PORT=${backend_db_port}
       - ALLOWED_HOSTS=${backend_domain},${frontend_domain}
       - QTICKETS_ENDPOINT=${qtickets_endpoint}
       - QTICKETS_TOKEN=${qtickets_token}
       - QTICKETS_SECRET=${qtickets_secret}
       - SENTRY_DSN=${backend_sentry_dsn}
       - CORS_LIST=${backend_cors_list},http://localhost:3000
+    networks:
+      - net
+
+  imageboard:
+    image: ${imageboard_image_name}:${imageboard_image_version}
+    environment:
+      - DEBUG=
+      - SECRET_KEY=${imageboard_secret_key}
+      - DB_NAME=${imageboard_db_name}
+      - DB_USER=${imageboard_db_user}
+      - DB_PASSWORD=${imageboard_db_password}
+      - DB_HOST=${imageboard_db_host}
+      - DB_PORT=${imageboard_db_port}
+      - ALLOWED_HOSTS=${imageboard_domain}
+      - AWS_ACCESS_KEY_ID=${imageboard_s3_access_key_id}
+      - AWS_SECRET_ACCESS_KEY=${imageboard_s3_secret_access_key}
+      - AWS_STORAGE_BUCKET_NAME=${imageboard_s3_storage_bucket_name}
+      - AWS_S3_REGION_NAME=${imageboard_s3_region_name}
+      - AWS_S3_ENDPOINT_URL=${imageboard_s3_endpoint_url}
+      - MEDIA_URL=${imageboard_media_url}
     networks:
       - net
 
@@ -55,7 +75,7 @@ services:
       - LE_EMAIL=${email}
       - LE_FQDN=krddevdays.ru
     configs:
-      - source: nginx_config_13
+      - source: nginx_config_14
         target: /etc/nginx/service.conf
       - source: dhparams_${dhparams_version}
         target: /etc/nginx/ssl/dhparams.pem

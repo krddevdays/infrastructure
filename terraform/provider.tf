@@ -1,5 +1,22 @@
-provider "yandex" {}
-provider "dnsimple" {}
+provider "yandex" {
+    version = "0.23"
+}
+
+provider "dnsimple" {
+    version = "0.2"
+}
+
+provider "archive" {
+    version = "1.3"
+}
+
+provider "null" {
+    version = "2.1"
+}
+
+provider "template" {
+    version = "2.1"
+}
 
 terraform {
   backend "s3" {
