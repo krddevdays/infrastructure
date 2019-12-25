@@ -1,5 +1,5 @@
 provider "yandex" {
-    version = "0.23"
+    version = "0.27"
 }
 
 provider "dnsimple" {
