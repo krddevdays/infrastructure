@@ -68,7 +68,7 @@ services:
       - net
 
   nginx:
-    image: umputun/nginx-le:1.1.0
+    image: umputun/nginx-le:latest
     environment:
       - TZ=Europe/Moscow
       - LETSENCRYPT=true
