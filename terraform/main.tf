@@ -7,13 +7,13 @@ data "template_file" "cloudinit" {
 }
 
 resource "yandex_compute_instance" "docker_swarm" {
-  name        = "docker-swarm"
-  platform_id = "standard-v1"
+  platform_id = "standard-v2"
   zone        = "${yandex_vpc_subnet.public.zone}"
 
   resources {
     cores  = 2
     memory = 2
+    core_fraction = 5
   }
 
   metadata {
@@ -24,8 +24,7 @@ resource "yandex_compute_instance" "docker_swarm" {
   boot_disk {
     initialize_params = {
       image_id    = "${data.yandex_compute_image.ubuntu_1804_lts.id}"
-      name        = "docker-swarm-manager"
-      size        = 100
+      size        = 20
     }
   }
 
@@ -54,5 +53,9 @@ resource "yandex_compute_instance" "docker_swarm" {
     inline = [
       "sudo docker swarm init --advertise-addr ${self.network_interface.0.ip_address}"
     ]
+  }
+
+  lifecycle {
+      create_before_destroy = true
   }
 }
