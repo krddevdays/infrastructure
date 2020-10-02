@@ -118,7 +118,8 @@ resource "yandex_storage_bucket" "imageboard" {
     secret_key = "${yandex_iam_service_account_static_access_key.s3.secret_key}"
 
     depends_on = [
-        "yandex_iam_service_account_iam_binding.editor"
+        "yandex_iam_service_account_iam_binding.editor",
+        "yandex_iam_service_account_static_access_key.s3"
     ]
 }
 
