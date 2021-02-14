@@ -93,3 +93,16 @@ services:
     depends_on:
       - site_frontend
       - site_backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 2
+      update_config:
+        failure_action: rollback
+        delay: 5s
